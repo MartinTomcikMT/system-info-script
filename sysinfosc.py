@@ -1,91 +1,144 @@
-# First I need to import appropriate libraries to get desired data, platform is already part of Python standard library, others must be installed (pip install psutil colorama)
-
+# Import required libraries
 from colorama import Fore, Style, init
 import psutil
 import platform
 import datetime
 import os
 
-# Initialize colorama
+# Initialize colorama (auto reset colors after each print)
 init(autoreset=True)
 
-# Box width for formatting
-WIDTH = 80
+# Width of the UI box
+WIDTH = 90
 
-# Helper functions for nice formatting
+# ASCII banner displayed at the top
+ASCII_ART = r"""
+   _____           _                   _____        __         _____           _       _
+  / ____|         | |                 |_   _|      / _|       / ____|         (_)     | |
+ | (___  _   _ ___| |_ ___ _ __ ___     | |  _ __ | |_ ___   | (___   ___ _ __ _ _ __ | |_
+  \___ \| | | / __| __/ _ \ '_ ` _ \    | | | '_ \|  _/ _ \   \___ \ / __| '__| | '_ \| __|
+  ____) | |_| \__ \ ||  __/ | | | | |  _| |_| | | | || (_) |  ____) | (__| |  | | |_) | |_
+ |_____/ \__, |___/\__\___|_| |_| |_| |_____|_| |_|_| \___/  |_____/ \___|_|  |_| .__/ \__|
+          __/ |                                                                 | |
+         |___/                                                                  |_|
+"""
+
+# Print ASCII art in red color
+def print_ascii_art():
+    print(Fore.RED + ASCII_ART + Style.RESET_ALL)
+
+# Print full horizontal line
 def print_line():
     print("=" * WIDTH)
 
+# Print empty line with borders
 def print_empty():
     print("=" + " " * (WIDTH - 2) + "=")
 
-def print_center(text):
-    print("=" + text.center(WIDTH - 2) + "=")
+# Print centered text inside a bordered line
+def print_center(text, color):
+    visible_text = text.center(WIDTH - 4)
+    print("=" + f" {color}{visible_text}{Style.RESET_ALL} " + "=")
 
-def print_left(label, value):
-    text = f"{label}: {value}"
-    print("=" + f" {text:<{WIDTH - 3}}" + "=")
+# Print left-aligned label and value inside a bordered line
+def print_left(label, value, color):
+    raw_text = f"{label}: {value}"
 
-# SYSTEM INFO
+    # Trim text if it's too long
+    if len(raw_text) > WIDTH - 4:
+        raw_text = raw_text[:WIDTH - 7] + "..."
+
+    visible_text = raw_text.ljust(WIDTH - 4)
+
+    # Color only the label
+    colored_label = f"{color}{label}{Style.RESET_ALL}"
+    colored_text = visible_text.replace(label, colored_label, 1)
+
+    print("=" + f" {colored_text} " + "=")
+
+# Display system information
 def get_system_info():
+    section_color = Fore.RED
+    clear_screen()
+    print_ascii_art()
+
     print_line()
-    print_center(Fore.RED + "SYSTEM INFORMATION" + Style.RESET_ALL)
+    print_center("SYSTEM INFORMATION", section_color)
     print_empty()
 
-    print_left("System", platform.system())
-    print_left("Node Name", platform.node())
-    print_left("Release", platform.release())
-    print_left("Version", platform.version())
-    print_left("Machine", platform.machine())
-    print_left("Processor", platform.processor())
+    # Basic system details
+    print_left("System", platform.system(), section_color)
+    print_left("Node Name", platform.node(), section_color)
+    print_left("Release", platform.release(), section_color)
+    print_left("Version", platform.version(), section_color)
+    print_left("Machine", platform.machine(), section_color)
+    print_left("Processor", platform.processor(), section_color)
 
+    # System boot time
     boot_time = datetime.datetime.fromtimestamp(psutil.boot_time())
-    print_left("Boot Time", boot_time)
+    print_left("Boot Time", boot_time, section_color)
 
     print_empty()
     print_line()
 
-# CPU INFO
+# Display CPU information
 def get_cpu_info():
+    section_color = Fore.GREEN
+    clear_screen()
+    print_ascii_art()
+
     print_line()
-    print_center(Fore.YELLOW + "CPU INFO" + Style.RESET_ALL)
+    print_center("CPU INFO", section_color)
     print_empty()
 
-    print_left("CPU Usage", f"{psutil.cpu_percent(interval=1)}%")
-    print_left("CPU Count", psutil.cpu_count())
+    # CPU usage and number of cores
+    print_left("CPU Usage", f"{psutil.cpu_percent(interval=1)}%", section_color)
+    print_left("CPU Count", psutil.cpu_count(), section_color)
 
     print_empty()
     print_line()
 
-# MEMORY INFO
+# Display memory (RAM and swap) information
 def get_memory_info():
+    section_color = Fore.BLUE
+    clear_screen()
+    print_ascii_art()
+
     print_line()
-    print_center(Fore.BLUE + "MEMORY INFO" + Style.RESET_ALL)
+    print_center("MEMORY INFO", section_color)
     print_empty()
 
     memory = psutil.virtual_memory()
     swap = psutil.swap_memory()
 
-    print_left("Memory Usage", f"{memory.percent}%")
-    print_left("Swap Usage", f"{swap.percent}%")
+    # Memory usage statistics
+    print_left("Memory Usage", f"{memory.percent}%", section_color)
+    print_left("Swap Usage", f"{swap.percent}%", section_color)
 
     print_empty()
     print_line()
 
-# DISK INFO
+# Display disk usage information
 def get_disk_info():
+    section_color = Fore.YELLOW
+    clear_screen()
+    print_ascii_art()
+
     print_line()
-    print_center(Fore.GREEN + "DISK INFO" + Style.RESET_ALL)
+    print_center("DISK INFO", section_color)
     print_empty()
 
+    # Disk usage for root directory
     disk = psutil.disk_usage('/')
-    print_left("Disk Usage", f"{disk.percent}%")
+    print_left("Disk Usage", f"{disk.percent}%", section_color)
 
     print_empty()
     print_line()
 
-# MENU
+# Show main menu
 def show_menu():
+    clear_screen()
+    print_ascii_art()
     print("\nChoose what information you want to see:")
     print("s - System information")
     print("c - CPU information")
@@ -93,33 +146,40 @@ def show_menu():
     print("d - Disk information")
     print("e - Exit")
 
+# Clear terminal screen (Windows/Linux/Mac)
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-# MAIN LOOP
+# Main program loop
 def main():
     while True:
         show_menu()
         choice = input("\nYour choice: ").strip().lower()
 
+        # Handle user input
         if choice == "s":
-            clear_screen()
             get_system_info()
+            input("\nPress Enter to continue...")
         elif choice == "c":
-            clear_screen()
             get_cpu_info()
+            input("\nPress Enter to continue...")
         elif choice == "m":
-            clear_screen()
             get_memory_info()
+            input("\nPress Enter to continue...")
         elif choice == "d":
-            clear_screen()
             get_disk_info()
+            input("\nPress Enter to continue...")
         elif choice == "e":
+            clear_screen()
+            print_ascii_art()
             print("Exiting program...")
             break
         else:
             clear_screen()
+            print_ascii_art()
             print("Invalid choice. Please try again.")
+            input("\nPress Enter to continue...")
 
+# Run the program
 if __name__ == "__main__":
     main()
