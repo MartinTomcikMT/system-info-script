@@ -1,6 +1,10 @@
-# 🖥️ System Info Script
+# 🖥️ System Info Script (python)
 
 Simple Python CLI application for displaying system information such as CPU, memory, disk usage, and OS details.
+
+This is my first completed project in my portfolio. Although it may seem simple, I chose this project as a starting point to demonstrate my learning process, problem-solving approach, and growing technical skills.
+
+In this README, you will find the project goals, its purpose, how it works, the technologies used, challenges I encountered and how I solved them, as well as screenshots and ideas for future improvements.
 
 ---
 
@@ -32,6 +36,17 @@ The goal of this project was to:
 * `psutil` – system resource monitoring
 * `platform` – OS information
 * `colorama` – colored CLI output
+
+-- 
+
+## 👍 Pre-requisites
+
+The goal of this project was to:
+
+* practice Python fundamentals
+* work with system-level data
+* build a simple interactive CLI application
+* simulate a basic monitoring tool (DevOps-oriented)
 
 ---
 
@@ -93,6 +108,16 @@ cd system-info-script
 pip install -r requirements.txt
 python main.py
 ```
+
+---
+
+## 🎞️ Screenshoots
+
+* Working with external Python libraries (`psutil`, `colorama`)
+* Handling user input in CLI applications
+* Structuring code using functions
+* Creating interactive loops (`while True`)
+* Improving user experience in terminal applications
 
 ---
 
