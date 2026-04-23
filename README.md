@@ -133,12 +133,35 @@ Accidentally committed `venv` directory to GitHub
 ## 📸 Screenshot
 
 <p align="center">
-   <img src="./images/systeminfo_system_new.jpg" width="80%"/>
-   <img src="./images/systeminfo_cpu.jpg" width="80%"/>
-   <img src="./images/systeminfo_memory.jpg" width="80%"/>
-   <img src="./images/systeminfo_disk.jpg" width="80%"/>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="images/systeminfo_system_new.jpg" target="_blank">
+          <img src="images/systeminfo_system_new_small.jpg"/>
+        </a><br/>
+        <sub>System Info</sub>
+      </td>
+      <td align="center">
+        <a href="images/systeminfo_cpu.jpg" target="_blank">
+          <img src="images/systeminfo_cpu_small.jpg"/>
+        </a><br/>
+        <sub>CPU Info</sub>
+      </td>
+      <td align="center">
+        <a href="images/systeminfo_memory.jpg" target="_blank">
+          <img src="images/systeminfo_memory_small.jpg"/>
+        </a><br/>
+        <sub>Memory Info</sub>
+      </td>
+      <td align="center">
+        <a href="images/systeminfo_disk.jpg" target="_blank">
+          <img src="images/systeminfo_disk_small.jpg"/>
+        </a><br/>
+        <sub>Disk Info</sub>
+      </td>
+    </tr>
+  </table>
 </p>
-
 ---
 
 ## 📌 Future Improvements
