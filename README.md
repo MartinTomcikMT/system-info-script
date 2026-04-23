@@ -130,7 +130,7 @@ Accidentally committed `venv` directory to GitHub
 
 ---
 
-## 📸 Screenshot
+## 📸 Screenshots
 
 <p align="center">
   <table>
