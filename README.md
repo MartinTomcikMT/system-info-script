@@ -133,7 +133,10 @@ Accidentally committed `venv` directory to GitHub
 ## 📸 Screenshot
 
 <p align="center">
-  <img src="./images/systeminfo_system.jpg" width="80%"/>
+   <img src="./images/systeminfo_system_new.jpg" width="80%"/>
+   <img src="./images/systeminfo_cpu.jpg" width="80%"/>
+   <img src="./images/systeminfo_memory.jpg" width="80%"/>
+   <img src="./images/systeminfo_disk.jpg" width="80%"/>
 </p>
 
 ---
