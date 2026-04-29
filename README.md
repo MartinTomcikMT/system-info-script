@@ -162,6 +162,20 @@ Accidentally committed `venv` directory to GitHub
     </tr>
   </table>
 </p>
+
+---
+
+## 📃 Project Structure
+
+```text
+system-info-script/
+├── images/
+│   └── screenshots
+├── .gitignore
+└── README.md
+└── sysinfosc.py
+```
+
 ---
 
 ## 📌 Future Improvements
