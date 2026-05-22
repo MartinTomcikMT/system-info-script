@@ -190,4 +190,4 @@ system-info-script/
 ## 👤 Author
 
 Martin Tomcik  
-Aspiring DevOps Engineer ☁️
+Cloud & Infrastructure Engineer | Azure | AWS ☁️
